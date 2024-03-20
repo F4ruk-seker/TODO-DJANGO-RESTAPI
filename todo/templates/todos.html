@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="d-flex" style="height: 100vh">
+<article class="container justify-content-center m-auto">
+
+<form class="form-group mb-3 d-flex" method="post">
+    {% csrf_token %}
+    <input class="form-control" type="text" placeholder="Todo" name="title">
+    <button class="btn btn-primary ms-2">add</button>
+</form>
+
+{% if todos %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Task</th>
+      <th scope="col">Status</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for todo in todos %}
+    <tr>
+      <th scope="row">1</th>
+      <td>
+          <form class="d-flex" method="post" action="/update/{{ todo.id }}">
+            {% csrf_token %}
+            <input type="text" value="{{ todo.title }}" class="form-control rounded-0 rounded-start" name="title">
+              <button class="btn btn-primary rounded-0 rounded-end">Update</button>
+          </form>
+      </td>
+      <td class="my-auto">
+        <form action="/done/{{ todo.id }}" method="post">
+            {% csrf_token %}
+            {% if todo.is_Complete %}
+                <button class="btn btn-primary" type="submit">Todo</button>
+            {% else %}
+                <button class="btn btn-outline-primary" type="submit">Done</button>
+            {% endif %}
+        </form>
+      </td>
+     <td class="my-auto">
+        <form action="/remove/{{ todo.id }}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Remove</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">Henüz Bir Todo Eklenmedi</div>
+{% endif %}
+</article>
+</section>
+{% endblock %}
+
+
