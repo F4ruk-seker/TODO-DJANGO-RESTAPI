@@ -5,7 +5,7 @@ from todo.models import Todo
 
 
 def todo_list(request):
-    todos = Todo.objects.all()
+    todos = Todo.objects.filter(user=request.user)
     todo_form = TodoForm()
 
     if request.method == 'POST':
