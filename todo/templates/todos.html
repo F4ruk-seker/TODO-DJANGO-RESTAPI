@@ -17,8 +17,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Task</th>
-      <th scope="col">Status</th>
-      <th scope="col">Delete</th>
+      <th scope="col" class="text-center">Status</th>
+      <th scope="col" class="text-center">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -32,7 +32,7 @@
               <button class="btn btn-primary rounded-0 rounded-end">Update</button>
           </form>
       </td>
-      <td class="my-auto">
+      <td class="my-auto text-center">
         <form action="/done/{{ todo.id }}" method="post">
             {% csrf_token %}
             {% if todo.is_Complete %}
@@ -42,7 +42,7 @@
             {% endif %}
         </form>
       </td>
-     <td class="my-auto">
+     <td class="my-auto text-center">
         <form action="/remove/{{ todo.id }}" method="post">
             {% csrf_token %}
             <button class="btn btn-danger" type="submit">Remove</button>
